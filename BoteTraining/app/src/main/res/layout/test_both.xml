@@ -1,27 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true">
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText"
-            android:hint="THB" />
+            android:id="@+id/edtTHB"
+            android:hint="THB"
+            android:inputType="numberDecimal" />
 
         <RadioGroup
             android:layout_width="wrap_content"
+            android:id="@+id/radUnit"
             android:layout_height="fill_parent"
             android:layout_gravity="center_horizontal">
 
@@ -29,35 +26,42 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="USD"
-                android:id="@+id/radioButton" />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="YEN"
-                android:id="@+id/radioButton2"
-                android:checked="false" />
+                android:id="@+id/radUSD"
+                android:checked="true" />
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="GBP"
-                android:id="@+id/radioButton3" />
+                android:id="@+id/radGBP" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="YEN"
+                android:id="@+id/radYEN" />
         </RadioGroup>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Answer"
-            android:id="@+id/textView"
+            android:id="@+id/txtAnswer"
             android:textSize="35dp"
-            android:layout_gravity="center_horizontal" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:text="Answer" />
     </LinearLayout>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Convert"
-        android:id="@+id/button"
+        android:text="New Button"
+        android:id="@+id/btnExchange"
         android:layout_alignParentBottom="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/txtHello" />
 </RelativeLayout>

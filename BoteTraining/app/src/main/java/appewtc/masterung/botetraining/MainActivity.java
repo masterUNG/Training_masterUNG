@@ -4,19 +4,81 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 
 public class MainActivity extends ActionBarActivity {
 
+    //Explicit
+    private EditText edtTHB;
+    private RadioGroup radUnit;
+    private RadioButton radUSD, radGBP, radYEN;
+    private TextView txtAnswer;
+    private Button btnExchange;
+    private double douFactor, douTHB, douAnswer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
+        setContentView(R.layout.test_both);
+
+        bindWidget();
+
+        radUnit.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.radUSD:
+                        douFactor = 0.03;
+                        break;
+                    case R.id.radGBP:
+                        douFactor = 0.02;
+                        break;
+                    case R.id.radYEN:
+                        douFactor = 3.64;
+                        break;
+                    default:
+                        douFactor = 0;
+                }
+            }
+        });
+
+        clickExchange();
+
+    }   // onCreate
+
+    private void clickExchange() {
+
+        btnExchange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                douTHB = Double.parseDouble(edtTHB.getText().toString().trim());
+                douAnswer = douTHB * douFactor;
+                txtAnswer.setText(String.valueOf(douAnswer));
 
 
+            }   // event
+        });
 
+    }   // clickExchange
 
+    private void bindWidget() {
+
+        edtTHB = (EditText) findViewById(R.id.edtTHB);
+        radUnit = (RadioGroup) findViewById(R.id.radUnit);
+        radUSD = (RadioButton) findViewById(R.id.radUSD);
+        radGBP = (RadioButton) findViewById(R.id.radGBP);
+        radYEN = (RadioButton) findViewById(R.id.radYEN);
+        txtAnswer = (TextView) findViewById(R.id.txtAnswer);
+        btnExchange = (Button) findViewById(R.id.btnExchange);
+
+    }   // bindWidget
 
 
     @Override
@@ -40,4 +102,4 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-}
+}   // Main Class

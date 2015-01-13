@@ -50,6 +50,43 @@ public class MainActivity extends ActionBarActivity {
 
         objMyModel = new MyModel();
 
+        objMyModel.setOnMyModelChangeListener(new MyModel.OnMyModelChangeListener() {
+            @Override
+            public void onMyModelChangeListener(MyModel myModel) {
+
+                switch (myModel.getIntButton()) {
+                    case 2:
+                        imvIshihara.setImageResource(R.drawable.ishihara_02);
+                        break;
+                    case 3:
+                        imvIshihara.setImageResource(R.drawable.ishihara_03);
+                        break;
+                    case 4:
+                        imvIshihara.setImageResource(R.drawable.ishihara_04);
+                        break;
+                    case 5:
+                        imvIshihara.setImageResource(R.drawable.ishihara_05);
+                        break;
+                    case 6:
+                        imvIshihara.setImageResource(R.drawable.ishihara_06);
+                        break;
+                    case 7:
+                        imvIshihara.setImageResource(R.drawable.ishihara_07);
+                        break;
+                    case 8:
+                        imvIshihara.setImageResource(R.drawable.ishihara_08);
+                        break;
+                    case 9:
+                        imvIshihara.setImageResource(R.drawable.ishihara_09);
+                        break;
+                    case 10:
+                        imvIshihara.setImageResource(R.drawable.ishihara_10);
+                        break;
+                }   // switch
+
+            }   // event
+        });
+
 
     }   // aboutMyModel
 
@@ -113,11 +150,15 @@ public class MainActivity extends ActionBarActivity {
                         //Show Intent
                         Intent objIntent = new Intent(MainActivity.this, ShowScoreActivity.class);
                         startActivity(objIntent);
+                        finish();
 
                     } else {
 
                         txtQuestion.setText(Integer.toString(intIndex + 2) + ". What is this ?");
                         intIndex += 1;
+
+                        //Show Sent Value to Model
+                        objMyModel.setIntButton(intIndex + 1);
 
                     }   // Check Time
 

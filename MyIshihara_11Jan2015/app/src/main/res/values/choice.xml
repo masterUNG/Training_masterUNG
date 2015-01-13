@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="time2">
+
+        <item>33</item>
+        <item>5</item>
+        <item>55</item>
+        <item>Nothing</item>
+
+    </string-array>
+
+    <string-array name="time3">
+
+        <item>33</item>
+        <item>5</item>
+        <item>6</item>
+        <item>Nothing</item>
+
+    </string-array>
+    <string-array name="time4">
+
+        <item>12</item>
+        <item>5</item>
+        <item>55</item>
+        <item>Nothing</item>
+
+    </string-array>
+    <string-array name="time5">
+
+        <item>33</item>
+        <item>29</item>
+        <item>55</item>
+        <item>Nothing</item>
+
+    </string-array>
+    <string-array name="time6">
+
+        <item>33</item>
+        <item>5</item>
+        <item>45</item>
+        <item>Nothing</item>
+
+    </string-array>
+    <string-array name="time7">
+
+        <item>74</item>
+        <item>5</item>
+        <item>55</item>
+        <item>Nothing</item>
+
+    </string-array>
+    <string-array name="time8">
+
+        <item>33</item>
+        <item>42</item>
+        <item>55</item>
+        <item>Nothing</item>
+
+    </string-array>
+    <string-array name="time9">
+
+        <item>33</item>
+        <item>5</item>
+        <item>55</item>
+        <item>Nothing</item>
+
+    </string-array>
+    <string-array name="time10">
+
+        <item>33</item>
+        <item>5</item>
+        <item>55</item>
+        <item>Nothing</item>
+
+    </string-array>
+
+
+</resources>

@@ -1,11 +1,82 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/bg15">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/head"
+        android:id="@+id/textView"
+        android:textSize="@dimen/h1"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/text1" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1. What is this ?"
+        android:id="@+id/textView2"
+        android:textSize="20dp"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/text1" />
+
+    <ImageView
+        android:layout_width="@dimen/image"
+        android:layout_height="@dimen/image"
+        android:id="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/textView2"
+        android:src="@drawable/ishihara_01" />
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/radChoice"
+        android:layout_below="@+id/imageView"
+        android:layout_centerHorizontal="true">
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3"
+            android:id="@+id/radioButton"
+            android:textColor="@color/text1" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="33"
+            android:id="@+id/radioButton2"
+            android:textColor="@color/text1" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="55"
+            android:id="@+id/radioButton3"
+            android:textColor="@color/text1" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nothing"
+            android:id="@+id/radioButton4"
+            android:textColor="@color/text1" />
+    </RadioGroup>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Answer"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/text1" />
 </RelativeLayout>

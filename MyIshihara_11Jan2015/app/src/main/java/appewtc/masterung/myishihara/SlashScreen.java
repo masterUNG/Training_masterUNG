@@ -1,51 +1,39 @@
 package appewtc.masterung.myishihara;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
 
-public class ShowScoreActivity extends ActionBarActivity {
+public class SlashScreen extends ActionBarActivity {
 
-    private TextView txtShowScore;
-    private int intMyScore;
+    private Handler objHander;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_show_score);
+        setContentView(R.layout.activity_slash_screen);
 
-        //Bind Widget
-        txtShowScore = (TextView) findViewById(R.id.txtShowScore);
+        objHander = new Handler();
+        objHander.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent objIntent = new Intent(SlashScreen.this, MainActivity.class);
+                startActivity(objIntent);
+                finish();
+            }
+        }, 3000);
 
-        intMyScore = getIntent().getExtras().getInt("Score");
-        txtShowScore.setText(Integer.toString(intMyScore) + "/10" );
-
-    }   // onCreate
-
-    public void clickPlay(View view) {
-
-        Intent objIntent = new Intent(ShowScoreActivity.this, MainActivity.class);
-        startActivity(objIntent);
-        finish();
-
-    }   // clickPlay
-
-    public void clcikExit(View view) {
-
-        finish();
-
-    }   // clickExit
+    }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_show_score, menu);
+        getMenuInflater().inflate(R.menu.menu_slash_screen, menu);
         return true;
     }
 
@@ -63,4 +51,4 @@ public class ShowScoreActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-}   // Main Class
+}

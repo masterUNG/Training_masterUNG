@@ -1,7 +1,10 @@
 package appewtc.masterung.myvideo;
 
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -25,8 +28,30 @@ public class MainActivity extends ActionBarActivity {
         objUserTABLE.addNewDataToUSER(MainActivity.this, "testUser", "testPass", "testName");
         objServiceTABLE.addValueToServie(MainActivity.this, "story", "Image", "Video");
 
+        //Check Internet
+        checkInternet();
+
+
 
     }       // onCreate
+
+    private void checkInternet() {
+
+        ConnectivityManager objConnectivitiManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo objNetworkInfo = objConnectivitiManager.getActiveNetworkInfo();
+
+        if (objNetworkInfo != null && objNetworkInfo.isConnected() ) {
+
+            Log.d("video", "Connected InterNet OK");
+
+        } else {
+
+            MyAlertDalog objMyAlert = new MyAlertDalog();
+            objMyAlert.errorDialog(MainActivity.this, "Cannot Connected", "Please Check Your Internet");
+
+        }   // if
+
+    }   // checkInternet
 
 
     @Override

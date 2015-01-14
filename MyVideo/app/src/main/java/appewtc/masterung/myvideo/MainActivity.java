@@ -21,6 +21,11 @@ public class MainActivity extends ActionBarActivity {
         objUserTABLE = new UserTABLE(this);
         objServiceTABLE = new ServiceTABLE(this);
 
+        //Tester Add Value
+        objUserTABLE.addNewDataToUSER(MainActivity.this, "testUser", "testPass", "testName");
+        objServiceTABLE.addValueToServie(MainActivity.this, "story", "Image", "Video");
+
+
     }       // onCreate
 
 

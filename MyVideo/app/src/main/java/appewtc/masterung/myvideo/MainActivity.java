@@ -8,11 +8,20 @@ import android.view.MenuItem;
 
 public class MainActivity extends ActionBarActivity {
 
+    //Explicit
+    private UserTABLE objUserTABLE;
+    private ServiceTABLE objServiceTABLE;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-    }
+
+        //Call Database
+        objUserTABLE = new UserTABLE(this);
+        objServiceTABLE = new ServiceTABLE(this);
+
+    }       // onCreate
 
 
     @Override
@@ -36,4 +45,4 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-}
+}   // Main Class

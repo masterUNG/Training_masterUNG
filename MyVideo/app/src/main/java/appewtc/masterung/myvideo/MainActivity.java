@@ -10,6 +10,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+
+import java.io.InputStream;
+
 
 public class MainActivity extends ActionBarActivity {
 
@@ -62,6 +70,23 @@ public class MainActivity extends ActionBarActivity {
         if (Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy myPolicy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(myPolicy);
+        }
+
+
+        //Create InputStream
+        InputStream objInputStream = null;
+        String strJSON = "";
+
+        try {
+
+            HttpClient objHttpClient = new DefaultHttpClient();
+            HttpPost objHttpPost = new HttpPost("http://swiftcodingthai.com/jan/php_get_data_master.php");
+            HttpResponse objHttpResponse = objHttpClient.execute(objHttpPost);
+            HttpEntity objHttpEntity = objHttpResponse.getEntity();
+            objInputStream = objHttpEntity.getContent();
+
+        } catch (Exception e) {
+            Log.d("video", "Error from InputStream ==> " + e.toString());
         }
 
 

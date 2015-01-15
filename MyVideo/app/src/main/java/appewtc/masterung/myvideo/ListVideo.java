@@ -1,7 +1,6 @@
 package appewtc.masterung.myvideo;
 
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
@@ -15,62 +14,37 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 
 
-public class MainActivity extends ActionBarActivity {
-
-    //Explicit
-    private UserTABLE objUserTABLE;
-    private ServiceTABLE objServiceTABLE;
+public class ListVideo extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_list_video);
 
-        //Call Database
-        objUserTABLE = new UserTABLE(this);
-        objServiceTABLE = new ServiceTABLE(this);
+        //Sync JSON to Service
+        syncJSONtoService();
 
-        //Tester Add Value
-        objUserTABLE.addNewDataToUSER(MainActivity.this, "testUser", "testPass", "testName");
-        objServiceTABLE.addValueToServie(MainActivity.this, "story", "Image", "Video");
+    }   // onCreate
 
-        //Check Internet
-        checkInternet();
-
-
-
-    }       // onCreate
-
-    private void checkInternet() {
-
-        ConnectivityManager objConnectivitiManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-        NetworkInfo objNetworkInfo = objConnectivitiManager.getActiveNetworkInfo();
-
-        if (objNetworkInfo != null && objNetworkInfo.isConnected() ) {
-
-            Log.d("video", "Connected InterNet OK");
-            syncJSONtoMySQL();
-
-        } else {
-
-            MyAlertDalog objMyAlert = new MyAlertDalog();
-            objMyAlert.errorDialog(MainActivity.this, "Cannot Connected", "Please Check Your Internet");
-
-        }   // if
-
-    }   // checkInternet
-
-    private void syncJSONtoMySQL() {
+    private void syncJSONtoService() {
 
         //Setup Policy
         if (Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy myPolicy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
             StrictMode.setThreadPolicy(myPolicy);
         }
+
+        //Delete Alldata
+        SQLiteDatabase objSQLite = openOrCreateDatabase("video.db", MODE_PRIVATE, null);
+        objSQLite.delete("userTABLE", null, null);
 
 
         //Create InputStream
@@ -80,7 +54,7 @@ public class MainActivity extends ActionBarActivity {
         try {
 
             HttpClient objHttpClient = new DefaultHttpClient();
-            HttpPost objHttpPost = new HttpPost("http://swiftcodingthai.com/jan/php_get_data_master.php");
+            HttpPost objHttpPost = new HttpPost("http://swiftcodingthai.com/jan/php_get_data_service.php");
             HttpResponse objHttpResponse = objHttpClient.execute(objHttpPost);
             HttpEntity objHttpEntity = objHttpResponse.getEntity();
             objInputStream = objHttpEntity.getContent();
@@ -90,22 +64,60 @@ public class MainActivity extends ActionBarActivity {
         }
 
 
+
         //Create strJSON
         try {
+
+            BufferedReader objButteredReader = new BufferedReader(new InputStreamReader(objInputStream, "UTF-8"));
+            StringBuilder objStringBuilder = new StringBuilder();
+            String strLine = null;
+
+            while ((strLine = objButteredReader.readLine()) != null ) {
+                objStringBuilder.append(strLine);
+            }   // while
+
+            objInputStream.close();
+            strJSON = objStringBuilder.toString();
 
         } catch (Exception e) {
             Log.d("video", "Error strJSON ==> " + e.toString());
         }
 
 
+        //Update to SQLite
+        try {
 
-    }   // syncJSONtoMySQLite
+            final JSONArray objJSONArray = new JSONArray(strJSON);
+
+            for (int i = 0; i < objJSONArray.length(); i++) {
+
+                JSONObject objJSONObject = objJSONArray.getJSONObject(i);
+
+                String strStory = objJSONObject.getString("Story");
+                String strImage = objJSONObject.getString("Image");
+                String strVideo = objJSONObject.getString("Video");
+
+                ServiceTABLE objServiceTABLE = new ServiceTABLE(this);
+                long addValue = objServiceTABLE.addValueToServie(ListVideo.this, strStory, strImage, strVideo);
+
+
+            }   // for
+
+
+        } catch (Exception e) {
+            Log.d("video", "Error Update ==> " + e.toString());
+        }
+
+
+
+
+    }   // syncJSONtoService
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_list_video, menu);
         return true;
     }
 

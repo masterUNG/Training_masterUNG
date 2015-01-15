@@ -90,6 +90,14 @@ public class MainActivity extends ActionBarActivity {
         }
 
 
+        //Create strJSON
+        try {
+
+        } catch (Exception e) {
+            Log.d("video", "Error strJSON ==> " + e.toString());
+        }
+
+
 
     }   // syncJSONtoMySQLite
 

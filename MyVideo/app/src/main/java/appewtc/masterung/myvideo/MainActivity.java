@@ -2,6 +2,8 @@ package appewtc.masterung.myvideo;
 
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
+import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -43,6 +45,7 @@ public class MainActivity extends ActionBarActivity {
         if (objNetworkInfo != null && objNetworkInfo.isConnected() ) {
 
             Log.d("video", "Connected InterNet OK");
+            syncJSONtoMySQL();
 
         } else {
 
@@ -52,6 +55,18 @@ public class MainActivity extends ActionBarActivity {
         }   // if
 
     }   // checkInternet
+
+    private void syncJSONtoMySQL() {
+
+        //Setup Policy
+        if (Build.VERSION.SDK_INT > 9) {
+            StrictMode.ThreadPolicy myPolicy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+            StrictMode.setThreadPolicy(myPolicy);
+        }
+
+
+
+    }   // syncJSONtoMySQLite
 
 
     @Override

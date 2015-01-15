@@ -1,6 +1,7 @@
 package appewtc.masterung.myvideo;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
@@ -12,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
-import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -65,8 +65,14 @@ public class ListVideo extends ListActivity{
         String strImageURL = objCursor.getString(objCursor.getColumnIndex(ServiceTABLE.COLUMN_IMAGE));
         String strVideoURL = objCursor.getString(objCursor.getColumnIndex(ServiceTABLE.COLUMN_VIDEO));
 
-        Toast.makeText(ListVideo.this, "You Click " + strStory, Toast.LENGTH_SHORT).show();
+       // Toast.makeText(ListVideo.this, "You Click " + strStory, Toast.LENGTH_SHORT).show();
 
+        //Intent to ResultActivity
+        Intent objIntent = new Intent(ListVideo.this, ResultActivity.class);
+        objIntent.putExtra("Story", strStory);
+        objIntent.putExtra("ImageURL", strImageURL);
+        objIntent.putExtra("VideoURL", strVideoURL);
+        startActivity(objIntent);
 
     }   // onListItemClick
 

@@ -44,7 +44,7 @@ public class ListVideo extends ActionBarActivity {
 
         //Delete Alldata
         SQLiteDatabase objSQLite = openOrCreateDatabase("video.db", MODE_PRIVATE, null);
-        objSQLite.delete("userTABLE", null, null);
+        objSQLite.delete("serviceTABLE", null, null);
 
 
         //Create InputStream

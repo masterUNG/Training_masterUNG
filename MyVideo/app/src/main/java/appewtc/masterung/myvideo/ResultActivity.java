@@ -3,6 +3,7 @@ package appewtc.masterung.myvideo;
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -43,7 +45,21 @@ public class ResultActivity extends ActionBarActivity {
         //Process Download From URL
         new DownloadImageFromURL().execute(strImageURL);
 
+        //Create Video View
+        createVideoView();
+
     }   // onCreate
+
+    private void createVideoView() {
+
+        MediaController objMediaController = new MediaController(this);
+        objMediaController.setAnchorView(myVideoView);
+        objMediaController.setMediaPlayer(myVideoView);
+        Uri objUri = Uri.parse(strVideoURL);
+        myVideoView.setMediaController(objMediaController);
+        myVideoView.setVideoURI(objUri);
+        myVideoView.start();
+    }   // createVideoView
 
 
     private class DownloadImageFromURL extends AsyncTask<String, Void, Bitmap>{

@@ -23,6 +23,10 @@
             android:name=".ListVideo"
             android:label="@string/title_activity_list_video" >
         </activity>
+        <activity
+            android:name=".ResultActivity"
+            android:label="@string/title_activity_result" >
+        </activity>
     </application>
 
 </manifest>

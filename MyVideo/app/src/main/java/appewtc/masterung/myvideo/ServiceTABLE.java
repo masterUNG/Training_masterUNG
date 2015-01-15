@@ -2,6 +2,7 @@ package appewtc.masterung.myvideo;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
@@ -25,6 +26,21 @@ public class ServiceTABLE {
         readSQLite = objMyOpenHelper.getReadableDatabase();
 
     }   // Constructor
+
+    //Read All Data
+    public Cursor readAllData() {
+
+        Cursor objCursor = readSQLite.query(TABLE_SERVICE, new String[]{COLUMN_ID_SERVICE, COLUMN_STRORY, COLUMN_IMAGE, COLUMN_VIDEO}, null, null, null, null, null);
+
+        if (objCursor != null) {
+            objCursor.moveToFirst();
+        }
+
+
+        return objCursor;
+    }   // readAllData
+
+
 
     public long addValueToServie(Context context, String strStory, String strImage, String strVideo) {
 

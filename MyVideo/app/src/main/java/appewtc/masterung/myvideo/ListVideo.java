@@ -1,13 +1,18 @@
 package appewtc.masterung.myvideo;
 
+import android.app.ListActivity;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
-import android.os.StrictMode;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -22,17 +27,48 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 
-public class ListVideo extends ActionBarActivity {
+public class ListVideo extends ListActivity{
+
+    private SimpleCursorAdapter objSimpleCursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list_video);
+        //setContentView(R.layout.activity_list_video);
 
         //Sync JSON to Service
         syncJSONtoService();
 
+        //Create Listview
+        createListview();
+
     }   // onCreate
+
+    private void createListview() {
+
+        ServiceTABLE objServiceTABLE = new ServiceTABLE(this);
+        Cursor listStory = objServiceTABLE.readAllData();
+        String[] from = new String[]{ServiceTABLE.COLUMN_STRORY};
+        int[] target = new int[]{R.id.txtListStory};
+        objSimpleCursor = new SimpleCursorAdapter(this, R.layout.activity_list_video, listStory, from, target);
+        setListAdapter(objSimpleCursor);
+
+    }   // createListview
+
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+
+        Cursor objCursor = (Cursor) l.getItemAtPosition(position);
+        String strStory = objCursor.getString(objCursor.getColumnIndex(ServiceTABLE.COLUMN_STRORY));
+        String strImageURL = objCursor.getString(objCursor.getColumnIndex(ServiceTABLE.COLUMN_IMAGE));
+        String strVideoURL = objCursor.getString(objCursor.getColumnIndex(ServiceTABLE.COLUMN_VIDEO));
+
+        Toast.makeText(ListVideo.this, "You Click " + strStory, Toast.LENGTH_SHORT).show();
+
+
+    }   // onListItemClick
 
     private void syncJSONtoService() {
 

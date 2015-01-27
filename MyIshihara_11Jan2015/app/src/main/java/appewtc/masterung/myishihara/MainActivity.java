@@ -234,7 +234,8 @@ public class MainActivity extends ActionBarActivity {
             intScore += 1;
         }
 
-    }
+
+    }   // checkScore
 
     private void initialWidget() {
 
@@ -246,6 +247,7 @@ public class MainActivity extends ActionBarActivity {
         radChoice3 = (RadioButton) findViewById(R.id.radioButton3);
         radChoice4 = (RadioButton) findViewById(R.id.radioButton4);
         btnAnswer = (Button) findViewById(R.id.button);
+
 
     }   // initialWidget
 

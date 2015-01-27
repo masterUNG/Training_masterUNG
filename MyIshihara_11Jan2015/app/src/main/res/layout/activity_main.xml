@@ -79,4 +79,6 @@
         android:id="@+id/button"
         android:layout_alignParentBottom="true"
         android:textColor="@color/text1" />
+
+
 </RelativeLayout>

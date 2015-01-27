@@ -80,5 +80,15 @@
         android:layout_alignParentBottom="true"
         android:textColor="@color/text1" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:id="@+id/txtShow"
+        android:textColor="@color/text1"
+        android:textSize="180dp"
+        android:layout_above="@+id/button"
+        android:layout_marginLeft="50dp" />
+
 
 </RelativeLayout>

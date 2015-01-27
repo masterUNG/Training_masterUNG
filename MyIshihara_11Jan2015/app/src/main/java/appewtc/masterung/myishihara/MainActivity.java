@@ -18,7 +18,7 @@ import android.widget.TextView;
 public class MainActivity extends ActionBarActivity {
 
     //Explicit
-    private TextView txtQuestion;
+    private TextView txtQuestion, txtShow;
     private ImageView imvIshihara;
     private RadioGroup ragChoice;
     private RadioButton radChoice1, radChoice2, radChoice3, radChoice4;
@@ -234,6 +234,9 @@ public class MainActivity extends ActionBarActivity {
             intScore += 1;
         }
 
+        //Show Score
+        txtShow.setText(Integer.toString(intScore));
+
 
     }   // checkScore
 
@@ -247,6 +250,7 @@ public class MainActivity extends ActionBarActivity {
         radChoice3 = (RadioButton) findViewById(R.id.radioButton3);
         radChoice4 = (RadioButton) findViewById(R.id.radioButton4);
         btnAnswer = (Button) findViewById(R.id.button);
+        txtShow = (TextView) findViewById(R.id.txtShow);
 
 
     }   // initialWidget
